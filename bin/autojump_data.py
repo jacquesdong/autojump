@@ -132,6 +132,8 @@ def save(config, data):
         with open(temp.name, 'w', encoding='utf-8', errors='replace') as f:
             from operator import itemgetter
             for path, weight in sorted(data.items(), key=itemgetter(1,0), reverse=True):
+                if weight <= 0:
+                    continue
                 f.write(unico('%.1f\t%s\n' % (weight, path)))
 
             f.flush()
