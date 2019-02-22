@@ -130,8 +130,9 @@ def save(config, data):
         temp.close()
 
         with open(temp.name, 'w', encoding='utf-8', errors='replace') as f:
-            for path, weight in data.items():
-                f.write(unico('%s\t%s\n' % (weight, path)))
+            from operator import itemgetter
+            for path, weight in sorted(data.items(), key=itemgetter(1,0), reverse=True):
+                f.write(unico('%.1f\t%s\n' % (weight, path)))
 
             f.flush()
             os.fsync(f)
